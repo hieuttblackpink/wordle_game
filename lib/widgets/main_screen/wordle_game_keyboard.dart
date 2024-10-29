@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
+import 'package:votee_mobile_coding_interview_project/screen/wordle_game_help_screen.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_colors.dart';
 
 class WordleGameKeyboard extends StatefulWidget {
@@ -47,18 +48,19 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
             children: [
               GestureDetector(
                 onTap: () {
-                  gameProvider.guessWord();
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => const WordleGameHelp()));
                 },
                 child: Container(
                     width: 60,
-                    height: 50,
+                    height: 45,
                     padding: const EdgeInsets.all(5),
                     decoration:
-                        BoxDecoration(color: kBlueColor, borderRadius: BorderRadius.circular(10)),
+                        BoxDecoration(color: kWhiteColor, borderRadius: BorderRadius.circular(10)),
                     alignment: Alignment.center,
                     child: const Icon(
-                      Icons.check_rounded,
-                      color: kWhiteColor,
+                      Icons.help_rounded,
+                      color: kBlackColor,
                       size: 30,
                     )),
               ),
@@ -77,7 +79,7 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
                 },
                 child: Container(
                     width: 60,
-                    height: 50,
+                    height: 45,
                     padding: const EdgeInsets.all(5),
                     decoration:
                         BoxDecoration(color: kWhiteColor, borderRadius: BorderRadius.circular(10)),
@@ -106,7 +108,7 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
           },
           child: Container(
             width: 40,
-            height: 50,
+            height: 45,
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
                 color: (() {

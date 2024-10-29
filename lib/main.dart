@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:votee_mobile_coding_interview_project/screen/wordle_game_main_screen.dart';
+import 'package:votee_mobile_coding_interview_project/screen/wordle_game_welcome_screen.dart';
+import 'package:votee_mobile_coding_interview_project/utils/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Container(
-        color: Colors.black26,
-        child: const WordleGameScreen(),
+        color: kBlackColor,
+        child: const WordleGameWelcomeScreen(),
       ),
     );
   }

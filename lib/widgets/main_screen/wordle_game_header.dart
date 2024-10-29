@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_colors.dart';
-import 'package:votee_mobile_coding_interview_project/screen/wordle_game_help_screen.dart';
 
 class WordleGameHeader extends StatefulWidget {
   const WordleGameHeader({super.key});
@@ -21,11 +20,10 @@ class _WordleGameHeaderState extends State<WordleGameHeader> {
           children: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => const WordleGameHelp()));
+                  Navigator.of(context).pop();
                 },
                 icon: const Icon(
-                  Icons.help_rounded,
+                  Icons.arrow_back_ios_new_rounded,
                   color: kWhiteColor,
                   size: 35,
                 )),

@@ -5,6 +5,7 @@ import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle
 import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_header.dart';
 import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_keyboard.dart';
 import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_message.dart';
+import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_submit.dart';
 
 class WordleGameScreen extends StatefulWidget {
   const WordleGameScreen({super.key});
@@ -33,6 +34,8 @@ class _WordleGameScreenState extends State<WordleGameScreen> {
               WordleGameBoard(),
               SizedBox(height: 10),
               WordleGameKeyboard(),
+              SizedBox(height: 10),
+              WordleGameSubmit(),
             ],
           ),
         ),
