@@ -14,9 +14,7 @@ class WordleGameProvider extends ChangeNotifier {
   String wordleMessage = "";
   String wordleGuess = "";
   WordleGameStatus wordleGameStatus = WordleGameStatus.playing;
-
-  List<LetterModel> wordleRow =
-      List.generate(5, (index) => LetterModel(letter: "", status: "none"));
+  NetworkResponseType networkStatus = NetworkResponseType.success;
 
   List<List<LetterModel>> wordleBoardList = List.generate(
       6, (index) => List.generate(5, (index) => LetterModel(letter: "", status: "none")));
@@ -50,10 +48,14 @@ class WordleGameProvider extends ChangeNotifier {
   }
 
   Future<void> guessWord() async {
+    networkStatus = NetworkResponseType.loading;
+    notifyListeners();
+
     String guess = wordleBoardList[rowId].map((e) => e.letter).join().toLowerCase();
 
     if (guess.isEmpty || guess.length < 5) {
       wordleMessage = "Please input your word";
+      networkStatus = NetworkResponseType.success;
       notifyListeners();
       return;
     }
@@ -82,8 +84,10 @@ class WordleGameProvider extends ChangeNotifier {
         rowId++;
         letterId = 0;
       }
+      networkStatus = NetworkResponseType.success;
     } on Exception catch (e) {
-      debugPrint(e.toString());
+      debugPrint("Error: $e");
+      networkStatus = NetworkResponseType.error;
     } finally {
       notifyListeners();
     }
@@ -97,6 +101,7 @@ class WordleGameProvider extends ChangeNotifier {
     mappingLetterStatus = {};
     wordleMessage = "";
     wordleGameStatus = WordleGameStatus.playing;
+    networkStatus = NetworkResponseType.success;
     notifyListeners();
   }
 
