@@ -56,16 +56,16 @@ class WordleGameHelpContent extends StatelessWidget {
           }).toList(),
         ),
         const SizedBox(height: 50),
-        buildHelperContentItem("T"),
+        buildHelperContentItem(context, "T"),
         const SizedBox(height: 20),
-        buildHelperContentItem("E"),
+        buildHelperContentItem(context, "E"),
         const SizedBox(height: 20),
-        buildHelperContentItem("H"),
+        buildHelperContentItem(context, "H"),
       ],
     );
   }
 
-  Widget buildHelperContentItem(String letter) {
+  Widget buildHelperContentItem(BuildContext context, String letter) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 50),
       child: Row(
@@ -99,7 +99,7 @@ class WordleGameHelpContent extends StatelessWidget {
           const SizedBox(width: 20),
           Container(
             alignment: Alignment.topLeft,
-            width: 250,
+            width: MediaQuery.of(context).size.width * 0.5,
             child: Text(
               (() {
                 switch (letter) {

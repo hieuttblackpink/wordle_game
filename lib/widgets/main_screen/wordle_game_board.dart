@@ -23,7 +23,7 @@ class _WordleGameBoardState extends State<WordleGameBoard> {
                 return Container(
                   height: 64,
                   width: 64,
-                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  margin: const EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(
                       border: Border.all(
                           color: gameProvider.rowId == gameProvider.wordleBoardList.indexOf(e)

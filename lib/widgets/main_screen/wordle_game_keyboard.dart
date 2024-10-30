@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
 import 'package:votee_mobile_coding_interview_project/screen/wordle_game_help_screen.dart';
@@ -65,7 +64,7 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
                     )),
               ),
               SizedBox(
-                  width: 310,
+                  width: MediaQuery.of(context).size.height * 0.33,
                   child: buildKeyboardRow(
                     keyboardRow: keyboardRow3,
                     onKeyTab: (key) {

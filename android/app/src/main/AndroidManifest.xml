@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="votee_mobile_coding_interview_project"
+        android:label="Wordle Game"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

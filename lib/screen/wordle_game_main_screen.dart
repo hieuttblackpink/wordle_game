@@ -22,7 +22,7 @@ class _WordleGameScreenState extends State<WordleGameScreen> {
         ChangeNotifierProvider(create: (context) => WordleGameProvider()..initWordleGame())
       ],
       child: Container(
-        margin: const EdgeInsets.only(top: 100),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
         child: const SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
