@@ -76,9 +76,9 @@ wordle_game/
 
 ## Screenshots
 
-![Alt text](/screenshot/image.png)
-![Alt text](/screenshot/image.png)
-![Alt text](/screenshot/image.png)
+![Alt text](/screenshot/welcome.png)
+![Alt text](/screenshot/main.png)
+![Alt text](/screenshot/help.png)
 
 #
 
