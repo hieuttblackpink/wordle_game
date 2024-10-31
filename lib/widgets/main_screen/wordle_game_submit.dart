@@ -2,8 +2,10 @@
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
+import 'package:votee_mobile_coding_interview_project/screen/wordle_game_help_screen.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_colors.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_enum.dart';
 
@@ -19,32 +21,71 @@ class _WordleGameSubmitState extends State<WordleGameSubmit> {
   Widget build(BuildContext context) {
     return Consumer<WordleGameProvider>(
       builder: (ctx, gameProvider, child) {
-        return GestureDetector(
-          onTap: () async {
-            await gameProvider.guessWord();
-            if (gameProvider.networkStatus == NetworkResponseType.error) {
-              showAlertError(context);
-            }
-          },
-          child: Container(
-            height: 50,
-            width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: kBlueColor,
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => const WordleGameHelp()));
+              },
+              child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration:
+                      BoxDecoration(color: kWhiteColor, borderRadius: BorderRadius.circular(20)),
+                  alignment: Alignment.center,
+                  child: const Icon(
+                    Icons.help_rounded,
+                    color: kBlackColor,
+                    size: 30,
+                  )),
             ),
-            alignment: Alignment.center,
-            child: gameProvider.networkStatus == NetworkResponseType.loading
-                ? const CircularProgressIndicator(color: kWhiteColor)
-                : const Text(
-                    "Submit",
-                    style: TextStyle(
-                      color: kWhiteColor,
-                      decoration: TextDecoration.none,
-                      fontSize: 30,
-                    ),
+            GestureDetector(
+              onTap: () async {
+                await gameProvider.guessWord();
+                if (gameProvider.networkStatus == NetworkResponseType.error) {
+                  showAlertError(context);
+                }
+              },
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: kBlueColor,
+                ),
+                alignment: Alignment.center,
+                child: gameProvider.networkStatus == NetworkResponseType.loading
+                    ? const CircularProgressIndicator(color: kWhiteColor)
+                    : const Text(
+                        "Submit",
+                        style: TextStyle(
+                          color: kWhiteColor,
+                          decoration: TextDecoration.none,
+                          fontSize: 30,
+                        ),
+                      ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () async {
+                gameProvider.resetGame();
+              },
+              child: Container(
+                height: 50,
+                width: 50,
+                alignment: Alignment.center,
+                child: RotationTransition(
+                  turns: const AlwaysStoppedAnimation(180 / 360),
+                  child: SvgPicture.asset(
+                    "assets/next.svg",
+                    fit: BoxFit.fill,
                   ),
-          ),
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

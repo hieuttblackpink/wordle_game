@@ -128,6 +128,7 @@ class Logging extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     debugPrint("REQUEST[${options.method}] => PATH: ${options.path}");
+    debugPrint("Params: ${options.queryParameters}");
     return super.onRequest(options, handler);
   }
 

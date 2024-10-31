@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:votee_mobile_coding_interview_project/resources/models/wordle/letter_model.dart';
 import 'package:votee_mobile_coding_interview_project/resources/models/wordle/wordle_guess_model.dart';
@@ -7,9 +9,12 @@ import 'package:votee_mobile_coding_interview_project/utils/app_enum.dart';
 
 class WordleGameProvider extends ChangeNotifier {
   WordleGuessWordRepo repo = WordleGuessWordRepoImpl();
+  Random r = Random();
 
   int rowId = 0;
   int letterId = 0;
+
+  int seedWord = 1234;
 
   String wordleMessage = "";
   String wordleGuess = "";
@@ -21,7 +26,10 @@ class WordleGameProvider extends ChangeNotifier {
 
   Map<String, String> mappingLetterStatus = {};
 
-  void initWordleGame() {}
+  void initWordleGame() {
+    seedWord = r.nextInt(9999);
+    notifyListeners();
+  }
 
   void insertLetterToWord({required String letter}) {
     if (wordleGameStatus == WordleGameStatus.won || wordleGameStatus == WordleGameStatus.lost) {
@@ -61,7 +69,7 @@ class WordleGameProvider extends ChangeNotifier {
     }
 
     try {
-      final response = await repo.guessWord(word: guess);
+      final response = await repo.guessWord(word: guess, seed: seedWord);
       int countCorrect = 0;
       for (WordleGuess wordleGuess in response?.data ?? []) {
         wordleBoardList[rowId][wordleGuess.slot ?? 0].status = wordleGuess.result ?? "none";
@@ -94,6 +102,7 @@ class WordleGameProvider extends ChangeNotifier {
   }
 
   void resetGame() {
+    seedWord = r.nextInt(9999);
     wordleBoardList = List.generate(
         6, (index) => List.generate(5, (index) => LetterModel(letter: "", status: "none")));
     rowId = 0;

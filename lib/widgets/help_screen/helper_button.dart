@@ -15,7 +15,7 @@ class WordleGameHelpButton extends StatelessWidget {
         width: 200,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: kGreenColor,
+          color: kBlueColor,
         ),
         alignment: Alignment.center,
         child: const Text(

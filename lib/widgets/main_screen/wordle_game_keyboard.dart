@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
-import 'package:votee_mobile_coding_interview_project/screen/wordle_game_help_screen.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_colors.dart';
 
 class WordleGameKeyboard extends StatefulWidget {
@@ -46,16 +45,13 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => const WordleGameHelp()));
-                },
+                onTap: () {},
                 child: Container(
                     width: 60,
                     height: 45,
                     padding: const EdgeInsets.all(5),
                     decoration:
-                        BoxDecoration(color: kWhiteColor, borderRadius: BorderRadius.circular(10)),
+                        BoxDecoration(color: kBlackColor, borderRadius: BorderRadius.circular(10)),
                     alignment: Alignment.center,
                     child: const Icon(
                       Icons.help_rounded,

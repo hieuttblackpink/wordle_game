@@ -7,11 +7,11 @@ import 'package:votee_mobile_coding_interview_project/utils/app_enum.dart';
 
 class WordleGuessWordRepoImpl implements WordleGuessWordRepo {
   @override
-  Future<WordleGuessModel?> guessWord({required String word}) async {
+  Future<WordleGuessModel?> guessWord({required String word, int? seed}) async {
     NetworkResponseModel? response = await NetworkApi().networkCall(
         apiPath: ApiPath.guessRandom,
         requestType: NetworkRequestType.get,
-        querryParams: {"guess": word, "seed": 1234});
+        querryParams: {"guess": word, "seed": seed ?? 1234});
     WordleGuessModel? wordleGuessModel;
     response?.maybeWhen(
       success: (data) {
