@@ -12,12 +12,18 @@ _$WordleGuessModelImpl _$$WordleGuessModelImplFromJson(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => WordleGuess.fromJson(e as Map<String, dynamic>))
           .toList(),
+      message: json['message'] as String?,
+      status: json['status'] as String?,
+      code: (json['code'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$WordleGuessModelImplToJson(
         _$WordleGuessModelImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
+      'message': instance.message,
+      'status': instance.status,
+      'code': instance.code,
     };
 
 _$WordleGuessImpl _$$WordleGuessImplFromJson(Map<String, dynamic> json) =>

@@ -5,7 +5,12 @@ part 'wordle_guess_model.g.dart';
 
 @freezed
 class WordleGuessModel with _$WordleGuessModel {
-  const factory WordleGuessModel({List<WordleGuess>? data}) = _WordleGuessModel;
+  const factory WordleGuessModel({
+    List<WordleGuess>? data,
+    String? message,
+    String? status,
+    int? code,
+  }) = _WordleGuessModel;
 
   factory WordleGuessModel.fromJson(Map<String, dynamic> json) => _$WordleGuessModelFromJson(json);
 }

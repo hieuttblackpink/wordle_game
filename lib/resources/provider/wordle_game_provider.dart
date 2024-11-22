@@ -11,6 +11,9 @@ class WordleGameProvider extends ChangeNotifier {
   WordleGuessWordRepo repo = WordleGuessWordRepoImpl();
   Random r = Random();
 
+  int minRange = 1000;
+  int maxRange = 9999;
+
   int rowId = 0;
   int letterId = 0;
 
@@ -27,8 +30,22 @@ class WordleGameProvider extends ChangeNotifier {
   Map<String, String> mappingLetterStatus = {};
 
   void initWordleGame() {
-    seedWord = r.nextInt(9999);
+    getRandRange();
     notifyListeners();
+  }
+
+  Future<void> getRandRange() async {
+    try {
+      final respone = await repo.getRandRange();
+      minRange = respone?.data?.minRange ?? 1000;
+      maxRange = respone?.data?.maxRange ?? 9999;
+    } on Exception catch (e) {
+      debugPrint("Error: $e");
+    } finally {
+      seedWord = r.nextInt(maxRange - minRange) + minRange;
+      debugPrint(seedWord.toString());
+      notifyListeners();
+    }
   }
 
   void insertLetterToWord({required String letter}) {
@@ -70,29 +87,34 @@ class WordleGameProvider extends ChangeNotifier {
 
     try {
       final response = await repo.guessWord(word: guess, seed: seedWord);
-      int countCorrect = 0;
-      for (WordleGuess wordleGuess in response?.data ?? []) {
-        wordleBoardList[rowId][wordleGuess.slot ?? 0].status = wordleGuess.result ?? "none";
-        if (mappingLetterStatus[(wordleGuess.guess ?? "").toUpperCase()] != "correct") {
-          mappingLetterStatus[(wordleGuess.guess ?? "").toUpperCase()] = wordleGuess.result ?? "";
+      if (response?.code == 200) {
+        int countCorrect = 0;
+        for (WordleGuess wordleGuess in response?.data ?? []) {
+          wordleBoardList[rowId][wordleGuess.slot ?? 0].status = wordleGuess.result ?? "none";
+          if (mappingLetterStatus[(wordleGuess.guess ?? "").toUpperCase()] != "correct") {
+            mappingLetterStatus[(wordleGuess.guess ?? "").toUpperCase()] = wordleGuess.result ?? "";
+          }
+
+          if (wordleGuess.result == "correct") {
+            countCorrect++;
+          }
         }
 
-        if (wordleGuess.result == "correct") {
-          countCorrect++;
+        if (countCorrect == 5) {
+          wordleGameStatus = WordleGameStatus.won;
+          wordleMessage = "Congratulation! You won the game 🎉";
+        } else if (rowId == 5) {
+          wordleGameStatus = WordleGameStatus.lost;
+          wordleMessage = "Oh no! You lost the game";
+        } else {
+          rowId++;
+          letterId = 0;
         }
-      }
-
-      if (countCorrect == 5) {
-        wordleGameStatus = WordleGameStatus.won;
-        wordleMessage = "Congratulation! You won the game 🎉";
-      } else if (rowId == 5) {
-        wordleGameStatus = WordleGameStatus.lost;
-        wordleMessage = "Oh no! You lost the game";
+        networkStatus = NetworkResponseType.success;
       } else {
-        rowId++;
-        letterId = 0;
+        networkStatus = NetworkResponseType.success;
+        wordleMessage = response?.message ?? "";
       }
-      networkStatus = NetworkResponseType.success;
     } on Exception catch (e) {
       debugPrint("Error: $e");
       networkStatus = NetworkResponseType.error;
@@ -102,7 +124,7 @@ class WordleGameProvider extends ChangeNotifier {
   }
 
   void resetGame() {
-    seedWord = r.nextInt(9999);
+    seedWord = r.nextInt(maxRange - minRange) + minRange;
     wordleBoardList = List.generate(
         6, (index) => List.generate(5, (index) => LetterModel(letter: "", status: "none")));
     rowId = 0;
@@ -111,6 +133,7 @@ class WordleGameProvider extends ChangeNotifier {
     wordleMessage = "";
     wordleGameStatus = WordleGameStatus.playing;
     networkStatus = NetworkResponseType.success;
+    debugPrint(seedWord.toString());
     notifyListeners();
   }
 

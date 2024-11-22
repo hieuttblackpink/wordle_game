@@ -21,6 +21,9 @@ WordleGuessModel _$WordleGuessModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WordleGuessModel {
   List<WordleGuess>? get data => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  int? get code => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +37,8 @@ abstract class $WordleGuessModelCopyWith<$Res> {
           WordleGuessModel value, $Res Function(WordleGuessModel) then) =
       _$WordleGuessModelCopyWithImpl<$Res, WordleGuessModel>;
   @useResult
-  $Res call({List<WordleGuess>? data});
+  $Res call(
+      {List<WordleGuess>? data, String? message, String? status, int? code});
 }
 
 /// @nodoc
@@ -51,12 +55,27 @@ class _$WordleGuessModelCopyWithImpl<$Res, $Val extends WordleGuessModel>
   @override
   $Res call({
     Object? data = freezed,
+    Object? message = freezed,
+    Object? status = freezed,
+    Object? code = freezed,
   }) {
     return _then(_value.copyWith(
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<WordleGuess>?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -69,7 +88,8 @@ abstract class _$$WordleGuessModelImplCopyWith<$Res>
       __$$WordleGuessModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<WordleGuess>? data});
+  $Res call(
+      {List<WordleGuess>? data, String? message, String? status, int? code});
 }
 
 /// @nodoc
@@ -84,12 +104,27 @@ class __$$WordleGuessModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = freezed,
+    Object? message = freezed,
+    Object? status = freezed,
+    Object? code = freezed,
   }) {
     return _then(_$WordleGuessModelImpl(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<WordleGuess>?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      code: freezed == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -97,7 +132,9 @@ class __$$WordleGuessModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$WordleGuessModelImpl implements _WordleGuessModel {
-  const _$WordleGuessModelImpl({final List<WordleGuess>? data}) : _data = data;
+  const _$WordleGuessModelImpl(
+      {final List<WordleGuess>? data, this.message, this.status, this.code})
+      : _data = data;
 
   factory _$WordleGuessModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WordleGuessModelImplFromJson(json);
@@ -113,8 +150,15 @@ class _$WordleGuessModelImpl implements _WordleGuessModel {
   }
 
   @override
+  final String? message;
+  @override
+  final String? status;
+  @override
+  final int? code;
+
+  @override
   String toString() {
-    return 'WordleGuessModel(data: $data)';
+    return 'WordleGuessModel(data: $data, message: $message, status: $status, code: $code)';
   }
 
   @override
@@ -122,13 +166,16 @@ class _$WordleGuessModelImpl implements _WordleGuessModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WordleGuessModelImpl &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.code, code) || other.code == code));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_data), message, status, code);
 
   @JsonKey(ignore: true)
   @override
@@ -146,14 +193,23 @@ class _$WordleGuessModelImpl implements _WordleGuessModel {
 }
 
 abstract class _WordleGuessModel implements WordleGuessModel {
-  const factory _WordleGuessModel({final List<WordleGuess>? data}) =
-      _$WordleGuessModelImpl;
+  const factory _WordleGuessModel(
+      {final List<WordleGuess>? data,
+      final String? message,
+      final String? status,
+      final int? code}) = _$WordleGuessModelImpl;
 
   factory _WordleGuessModel.fromJson(Map<String, dynamic> json) =
       _$WordleGuessModelImpl.fromJson;
 
   @override
   List<WordleGuess>? get data;
+  @override
+  String? get message;
+  @override
+  String? get status;
+  @override
+  int? get code;
   @override
   @JsonKey(ignore: true)
   _$$WordleGuessModelImplCopyWith<_$WordleGuessModelImpl> get copyWith =>

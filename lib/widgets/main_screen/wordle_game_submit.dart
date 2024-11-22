@@ -43,7 +43,9 @@ class _WordleGameSubmitState extends State<WordleGameSubmit> {
             ),
             GestureDetector(
               onTap: () async {
-                await gameProvider.guessWord();
+                if (gameProvider.wordleGameStatus == WordleGameStatus.playing) {
+                  await gameProvider.guessWord();
+                }
                 if (gameProvider.networkStatus == NetworkResponseType.error) {
                   showAlertError(context);
                 }

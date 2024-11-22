@@ -47,7 +47,7 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                    width: 60,
+                    width: 50,
                     height: 45,
                     padding: const EdgeInsets.all(5),
                     decoration:
@@ -73,7 +73,7 @@ class _WordleGameKeyboardState extends State<WordleGameKeyboard> {
                   gameProvider.removeLetterInWord();
                 },
                 child: Container(
-                    width: 60,
+                    width: 55,
                     height: 45,
                     padding: const EdgeInsets.all(5),
                     decoration:
