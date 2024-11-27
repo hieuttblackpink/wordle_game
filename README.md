@@ -1,4 +1,4 @@
-# votee_mobile_coding_interview_project
+# wordle_game_mobile_application_project
 
 # Wordle Game 🎮
 
