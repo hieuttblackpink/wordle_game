@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
+import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_timer_provider.dart';
 import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_board.dart';
 import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_header.dart';
 import 'package:votee_mobile_coding_interview_project/widgets/main_screen/wordle_game_keyboard.dart';
@@ -19,10 +20,11 @@ class _WordleGameScreenState extends State<WordleGameScreen> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => WordleGameProvider()..initWordleGame())
+        ChangeNotifierProvider(create: (context) => WordleGameProvider()..initWordleGame()),
+        ChangeNotifierProvider(create: (context) => WordleGameTimerProvider()..initTimer()),
       ],
       child: Container(
-        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
+        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.07),
         child: const SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

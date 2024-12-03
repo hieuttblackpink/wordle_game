@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_provider.dart';
+import 'package:votee_mobile_coding_interview_project/resources/provider/wordle_game_timer_provider.dart';
 import 'package:votee_mobile_coding_interview_project/screen/wordle_game_help_screen.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_colors.dart';
 import 'package:votee_mobile_coding_interview_project/utils/app_enum.dart';
@@ -19,8 +20,8 @@ class WordleGameSubmit extends StatefulWidget {
 class _WordleGameSubmitState extends State<WordleGameSubmit> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<WordleGameProvider>(
-      builder: (ctx, gameProvider, child) {
+    return Consumer2<WordleGameProvider, WordleGameTimerProvider>(
+      builder: (ctx, gameProvider, timerProvider, child) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -49,6 +50,9 @@ class _WordleGameSubmitState extends State<WordleGameSubmit> {
                 if (gameProvider.networkStatus == NetworkResponseType.error) {
                   showAlertError(context);
                 }
+                if (gameProvider.wordleGameStatus != WordleGameStatus.playing) {
+                  timerProvider.stopTimer();
+                }
               },
               child: Container(
                 height: 50,
@@ -73,6 +77,7 @@ class _WordleGameSubmitState extends State<WordleGameSubmit> {
             GestureDetector(
               onTap: () async {
                 gameProvider.resetGame();
+                timerProvider.restartTimer();
               },
               child: Container(
                 height: 50,
