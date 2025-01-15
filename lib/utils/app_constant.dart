@@ -14,4 +14,6 @@ class AppConstant {
     'platform': Platform.isAndroid ? 'android' : 'ios',
     'Authorization': "access_token"
   };
+
+  static const String dbTableWordleHistory = "Wordle_History";
 }
